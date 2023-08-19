@@ -13,6 +13,10 @@ const authMiddleware = async (req, res, next) => {
 						if (err) {
 							reject(err);
 						} else {
+							console.log("authmiddleware");
+							console.log(decoded);
+							req.id = decoded.id;
+							req.code = decoded.code;
 							resolve(decoded);
 						}
 					});

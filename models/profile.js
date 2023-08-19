@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
-	userId: String,
+	userId: { type: String, required : true },
+	code : { type : String, required : true },
 	profile: {
 		name : String,
 		code : String,
@@ -16,6 +17,8 @@ const profileSchema = new mongoose.Schema({
 			imageUrl : String
 		}
 	]
+}, {
+    versionKey: false 
 });
 
 const UserProfile = mongoose.model('profile', profileSchema);

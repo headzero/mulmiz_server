@@ -7,9 +7,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var appbgRouter = require('./routes/appbg');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
+const profileRouter = require('./routes/profile');
+const appbgRouter = require('./routes/appbg');
+// const passport = require('passport');
+// const authRoutes = require('./routes/auth');
 
 var app = express();
 const { PORT, MONGO_URI } = process.env;
@@ -31,14 +34,17 @@ mongoose
   .then(() => console.log('Successfully connected to mongodb'))
   .catch(e => console.error(e));
 
+// 인증
+// app.use(passport.initialize());
+// app.use('/auth', authRoutes);
 
-app.use('/', indexRouter);
-app.use('/members', require('./member'));
+//app.use('/', indexRouter);
+app.use('/', profileRouter);
 app.use('/', require('./uploader'));
 
 app.use('/', appbgRouter); // app background
 app.use('/users', require('./authmiddleware'));
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 
 
 // catch 404 and forward to error handler
